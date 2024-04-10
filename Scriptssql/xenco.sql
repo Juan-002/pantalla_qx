@@ -14,10 +14,14 @@ CREATE TABLE TB_datos_qx (
 
 
 -- insert datos
-INSERT INTO TB_datos_qx (quirofano, profesional, paciente, ingreso, evaluacion_pre_anestecia, evaluacion_qx, registro_anestecia, post_operatorio, recuperacion, anestecia_en_qx) 
+INSERT INTO tb_datos_qx (quirofano, profesional, paciente, ingreso, evaluacion_pre_anestecia, evaluacion_qx, registro_anestecia, post_operatorio, recuperacion, anestecia_en_qx) 
 VALUES 
 (1, 'David Jimenez', 'Lucas', 'En ejecucion', 'No Ejecutado', 'ejecutado', 'ejecutado', 'ejecutado', 'ejecutado', 'No Ejecutado'),
 (2, 'Luis Lopez', 'Lucas', 'ejecutado', 'No Ejecutado', 'ejecutado', 'ejecutado', 'No Ejecutado', 'ejecutado', 'No Ejecutado'),
 (3, 'Luis Lopez', 'Lucas', 'ejecutado', 'No Ejecutado', 'ejecutado', 'ejecutado', 'No Ejecutado', 'ejecutado', 'No Ejecutado'),
 (4, 'Luis Lopez', 'Lucas', 'ejecutado', 'No Ejecutado', 'ejecutado', 'No Ejecutado', 'No Ejecutado', 'ejecutado', 'No Ejecutado'),
 (5, 'Luis Lopez', 'Lucas', 'ejecutado', 'ejecutado', 'ejecutado', 'ejecutado', 'No Ejecutado', 'ejecutado', 'No Ejecutado');
+
+
+UPDATE TB_datos_qx SET ingreso = 'En ejecucion';
+UPDATE tb_datos_qx SET post_operatorio = 'ejecutado' WHERE quirofano = 1;

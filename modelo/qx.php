@@ -1,16 +1,10 @@
 <?php
-$host = "localhost";
-$usuario = "root";
-$contraseña = "t";
-$base_de_datos = "xenco";
-
-$conexion = new mysqli($host, $usuario, $contraseña, $base_de_datos);
+$conexion = mysqli_connect('localhost','root','','xenco');
 
 // Verificar la conexión
 if ($conexion->connect_error) {
     die("Error de conexión a la base de datos: " . $conexion->connect_error);
 }
-
 // Paso 2: Operaciones 
 $sql_select = "SELECT * FROM tb_datos_qx";
 $resultado = $conexion->query($sql_select);

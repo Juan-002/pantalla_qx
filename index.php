@@ -1,15 +1,22 @@
+<?php
+$conexion = mysqli_connect('localhost','root','','xenco');
+
+// Verificar la conexión
+if ($conexion->connect_error) {
+    die("Error de conexión a la base de datos: " . $conexion->connect_error);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Convert | Export html Table to CSV & EXCEL File</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         .ejecutado {
-            background-color: green;
+            background-color: #9BFF00;
         }
         .en-ejecucion {
             background-color: orange;
@@ -46,67 +53,29 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+             
+                        $sql = "SELECT * FROM tb_datos_qx";
+                        $result = mysqli_query($conexion,$sql);
+
+                        while($mostrar=mysqli_fetch_array($result)){
+                    ?>
                     <tr>
-                        <td> 1 </td>
-                        <td> David Jimenez</td>
-                        <td> Lucas </td>
-                        <td> En ejecucion </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                    </tr>
-                    <tr>
-                        <td> 2 </td>
-                        <td> Luis Lopez</td>
-                        <td> Lucas </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                    </tr>
-                    <tr>
-                        <td> 3</td>
-                        <td> Luis Lopez</td>
-                        <td> Lucas </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                    </tr>
-                    <tr>
-                        <td> 4</td>
-                        <td> Luis Lopez</td>
-                        <td> Lucas </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                    </tr>
-                    <tr>
-                        <td> 5</td>
-                        <td> Luis Lopez</td>
-                        <td> Lucas </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                        <td> ejecutado </td>
-                        <td> No Ejecutado </td>
-                    </tr>
-                    
+                            <td><?php echo $mostrar["quirofano"]                   ?></td>
+                            <td><?php echo $mostrar["profesional"]                 ?></td>
+                            <td><?php echo $mostrar["paciente"]                    ?></td>
+                            <td><?php echo $mostrar["ingreso"]                     ?></td>
+                            <td><?php echo $mostrar["evaluacion_pre_anestecia"]    ?></td>
+                            <td><?php echo $mostrar["evaluacion_qx"]               ?></td>
+                            <td><?php echo $mostrar["registro_anestecia"]          ?></td>
+                            <td><?php echo $mostrar["post_operatorio"]             ?></td>
+                            <td><?php echo $mostrar["recuperacion"]                ?></td>
+                            <td><?php echo $mostrar["anestecia_en_qx"]             ?></td>
+                    </tr>      
+                        
+                <?php
+                    }
+                ?>
                 </tbody>
             </table>
         </section>
@@ -138,3 +107,7 @@
 </body>
 
 </html>
+<?php
+// Cerrar la conexión
+$conexion->close();
+?>
