@@ -1,9 +1,23 @@
 <?php
-$conexion = mysqli_connect('localhost','root','','xenco');
+try {
+    // Configuración de la conexión
+    $dsn = 'odbc:pruebasxenco1'; // Reemplaza 'nombre_del_dsn' con el nombre de tu DSN
+    $usuario = 'SA';
+    $contraseña = 'Clinic@031';
 
-// Verificar la conexión
-if ($conexion->connect_error) {
-    die("Error de conexión a la base de datos: " . $conexion->connect_error);
+    // Conexión utilizando PHP PDO
+    $conexion = new PDO($dsn, $usuario, $contraseña);
+
+    // Configuración de opciones de PDO
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    //echo "Conexión exitosa a la base de datos SQL Server";
+} catch (PDOException $e) {
+    // Captura de excepciones con mejoras en PHP 8.1
+    $códigoError = $e->getCode();
+    $mensajeError = $e->getMessage();
+
+    echo "Error en la conexión ($códigoError): " . $mensajeError;
 }
 ?>
 
@@ -54,24 +68,16 @@ if ($conexion->connect_error) {
                 </thead>
                 <tbody>
                     <?php
-             
-                        $sql = "SELECT * FROM tb_datos_qx";
-                        $result = mysqli_query($conexion,$sql);
+                    
+                        $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_COD_TIPOATEN = 'X65C'and QM1_FCH_FECHA = '20210414'";
+                        $result = $conexion->query($sql);
 
-                        while($mostrar=mysqli_fetch_array($result)){
+                        while($mostrar = $result->fetch(PDO::FETCH_ASSOC)){
                     ?>
                     <tr>
-                            <td><?php echo $mostrar["quirofano"]                   ?></td>
-                            <td><?php echo $mostrar["profesional"]                 ?></td>
-                            <td><?php echo $mostrar["paciente"]                    ?></td>
-                            <td><?php echo $mostrar["ingreso"]                     ?></td>
-                            <td><?php echo $mostrar["evaluacion_pre_anestecia"]    ?></td>
-                            <td><?php echo $mostrar["evaluacion_qx"]               ?></td>
-                            <td><?php echo $mostrar["registro_anestecia"]          ?></td>
-                            <td><?php echo $mostrar["post_operatorio"]             ?></td>
-                            <td><?php echo $mostrar["recuperacion"]                ?></td>
-                            <td><?php echo $mostrar["anestecia_en_qx"]             ?></td>
-                    </tr>      
+                            <td><?php echo $mostrar["QM1_COD_SALA"]                ?></td>
+                    </tr>   
+                       
                         
                 <?php
                     }
@@ -109,5 +115,5 @@ if ($conexion->connect_error) {
 </html>
 <?php
 // Cerrar la conexión
-$conexion->close();
+$conexion = null;
 ?>
