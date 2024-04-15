@@ -1,26 +1,3 @@
-<?php
-try {
-    // Configuración de la conexión
-    $dsn = 'odbc:pruebasxenco1'; // Reemplaza 'nombre_del_dsn' con el nombre de tu DSN
-    $usuario = 'SA';
-    $contraseña = 'Clinic@031';
-
-    // Conexión utilizando PHP PDO
-    $conexion = new PDO($dsn, $usuario, $contraseña);
-
-    // Configuración de opciones de PDO
-    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    //echo "Conexión exitosa a la base de datos SQL Server";
-} catch (PDOException $e) {
-    // Captura de excepciones con mejoras en PHP 8.1
-    $códigoError = $e->getCode();
-    $mensajeError = $e->getMessage();
-
-    echo "Error en la conexión ($códigoError): " . $mensajeError;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,9 +22,9 @@ try {
     <main class="table" id="customers_table">
         <section class="table__header">
             <h1>QUIROFANOS</h1>
+            <img src="vistas/images/noel.png" alt="">
             <div class="input-group">
-                <input type="search" placeholder="Search Data...">
-                <img src="vistas/images/search.png" alt="">
+                <input type="search" placeholder="Search Data...">     
             </div>
         </section>
         <section class="table__body">
@@ -68,15 +45,37 @@ try {
                 </thead>
                 <tbody>
                     <?php
-                    
-                        $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_COD_TIPOATEN = 'X65C'and QM1_FCH_FECHA = '20210414'";
+                        require 'modelo/select.php';
+                        $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20210414'";
                         $result = $conexion->query($sql);
-
                         while($mostrar = $result->fetch(PDO::FETCH_ASSOC)){
+                          /*  $mostrar = $consultorio;
+                            $mostrar = $profesional;
+                            $mostrar = $pasiente;
+                            $mostrar = $ingreso;*/
+                            $consultorio = $mostrar["QM1_COD_SALA"];
+                            $profesional = $mostrar["QM1_NUM_MED"];      
+                            $pasiente = $mostrar["QM1_COD"];  
+                            $ingreso  = $mostrar["QM1_COD_TIPOATEN"];
+                            $ev_pre   = $mostrar[""];
+                            $ev_qx    = $mostrar[""];;
+                            $reg_anes = $mostrar[""];;
+                            $post_op  = $mostrar[""];;
+                            $recupera = $mostrar[""];;
+                            $anes_qx  = $mostrar[""];;
+
                     ?>
                     <tr>
-                            <td><?php echo $mostrar["QM1_COD_SALA"]                ?></td>
+
+                            <td><?php echo $consultorio               ?></td> 
+                            <td><?php echo $profesional              ?></td> 
+                            <td><?php echo $pasiente                     ?></td>
+                            <td><?php echo $ingreso           ?></td>
+
+                            
+                            <?php $conexion = null; ?>
                     </tr>   
+
                        
                         
                 <?php
@@ -113,7 +112,3 @@ try {
 </body>
 
 </html>
-<?php
-// Cerrar la conexión
-$conexion = null;
-?>

@@ -11,7 +11,7 @@ try {
     // Configuración de opciones de PDO
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "Conexión exitosa a la base de datos SQL Server";
+    //echo "Conexión exitosa a la base de datos SQL Server";
 } catch (PDOException $e) {
     // Captura de excepciones con mejoras en PHP 8.1
     $códigoError = $e->getCode();
