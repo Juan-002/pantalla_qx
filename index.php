@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
-        .ejecutado {
+        .Ejecutado {
             background-color: #9BFF00;
         }
         .en-ejecucion {
@@ -46,34 +46,26 @@
                 <tbody>
                     <?php
                         require 'modelo/select.php';
-                        $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'";
-                        $result = $conexion->query($sql);
-                        while($mostrar = $result->fetch(PDO::FETCH_ASSOC)){
-                            $quirofano = $mostrar["QM1_COD_SALA"];
-                            $profesional = $mostrar["QM1_NUM_MED"];      
-                            $pasiente =    $mostrar["QM1_COD"];  
-                            $ingreso  =    $mostrar["QM1_COD_TIPOATEN"];
-                            $ev_pre   =    $mostrar["QM1_COD_TIPOATEN"];
-                            $ev_qx    =    $mostrar["QM1_COD_TIPOATEN"];                       
-                            $reg_anes =    $mostrar["QM1_COD_TIPOATEN"];
-                            $post_op  =    $mostrar["QM1_COD_TIPOATEN"];
-                            $recupera =    $mostrar["QM1_COD_TIPOATEN"];
-                            $anes_qx  =    $mostrar["QM1_COD_TIPOATEN"];
+                            $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'and QM1_COD_TIPOATEN = 'X65C'";
+                            $result = $conexion->query($sql);
+                            while($mostrarQuirofano      = $result->fetch(PDO::FETCH_ASSOC)){
+                            $quirofano      =    $mostrarQuirofano["QM1_COD_SALA"];
+                            $profesional    =    $mostrarQuirofano["QM1_NUM_MED"];
+                            $pasiente       =    $mostrarQuirofano["QM1_COD"];
+                            $ingreso        =    $mostrarQuirofano["QM1_EST_CERRAR"];
 
                     ?>
                     <tr>  
-                        <td> <?php if ($quirofano != "" )   { echo $quirofano;}  ?> </td> 
-                        <td><?php echo $profesional             ?></td> 
-                        <td><?php echo $pasiente                ?></td>
-                        <td><?php if ($ingreso == "X65C")   { echo $ingreso;   } ?></td>
-                        <td><?php if ($ev_pre == "P18")     { echo $ev_pre;    } ?></td>
-                        <td><?php if ($ev_qx == "X65E")     { echo $ev_qx;    } ?></td>
-                        <td><?php if ($reg_anes == "X65R")  { echo $reg_anes; } ?></td>
-                        <td><?php if ($post_op == "P10")    { echo $post_op;  } ?></td>
-                        <td><?php if ($recupera == "X65P")  { echo $recupera; } ?></td>
-                        <td><?php if ($anes_qx == "X66R")   { echo $anes_qx;  } ?></td>
+                            <td> <?php  echo $quirofano ?> </td> 
+                            <td> <?php  echo $profesional ?> </td> 
+                            <td> <?php  echo $pasiente ?> </td>
+                            <td> <?php  if ($ingreso == "S") 
+                                   {echo "Ejecutado"; } else {
+                                    echo "No Ejecutado";
+                                   }
+                                 ?> </td> 
+                        <?php $conexion = null; ?>
 
-                            <?php $conexion = null; ?>
                     </tr>                        
                 <?php
                     }
@@ -95,8 +87,8 @@
                 var textoCelda = tabla.rows[i].cells[j].innerText.trim();
                 
                 // Aplicar el estilo según el texto de la celda
-                if (textoCelda === "ejecutado") {
-                    tabla.rows[i].cells[j].classList.add('ejecutado'); }
+                if (textoCelda === "Ejecutado") {
+                    tabla.rows[i].cells[j].classList.add('Ejecutado'); }
                 if (textoCelda === "En ejecucion") {
                     tabla.rows[i].cells[j].classList.add('en-ejecucion'); }
                 if (textoCelda === "No Ejecutado") {
