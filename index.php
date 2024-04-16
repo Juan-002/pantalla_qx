@@ -46,38 +46,35 @@
                 <tbody>
                     <?php
                         require 'modelo/select.php';
-                        $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20210414'";
+                        $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'";
                         $result = $conexion->query($sql);
                         while($mostrar = $result->fetch(PDO::FETCH_ASSOC)){
-                          /*  $mostrar = $consultorio;
-                            $mostrar = $profesional;
-                            $mostrar = $pasiente;
-                            $mostrar = $ingreso;*/
-                            $consultorio = $mostrar["QM1_COD_SALA"];
+                            $quirofano = $mostrar["QM1_COD_SALA"];
                             $profesional = $mostrar["QM1_NUM_MED"];      
-                            $pasiente = $mostrar["QM1_COD"];  
-                            $ingreso  = $mostrar["QM1_COD_TIPOATEN"];
-                            $ev_pre   = $mostrar[""];
-                            $ev_qx    = $mostrar[""];;
-                            $reg_anes = $mostrar[""];;
-                            $post_op  = $mostrar[""];;
-                            $recupera = $mostrar[""];;
-                            $anes_qx  = $mostrar[""];;
+                            $pasiente =    $mostrar["QM1_COD"];  
+                            $ingreso  =    $mostrar["QM1_COD_TIPOATEN"];
+                            $ev_pre   =    $mostrar["QM1_COD_TIPOATEN"];
+                            $ev_qx    =    $mostrar["QM1_COD_TIPOATEN"];                       
+                            $reg_anes =    $mostrar["QM1_COD_TIPOATEN"];
+                            $post_op  =    $mostrar["QM1_COD_TIPOATEN"];
+                            $recupera =    $mostrar["QM1_COD_TIPOATEN"];
+                            $anes_qx  =    $mostrar["QM1_COD_TIPOATEN"];
 
                     ?>
-                    <tr>
+                    <tr>  
+                        <td> <?php if ($quirofano != "" )   { echo $quirofano;}  ?> </td> 
+                        <td><?php echo $profesional             ?></td> 
+                        <td><?php echo $pasiente                ?></td>
+                        <td><?php if ($ingreso == "X65C")   { echo $ingreso;   } ?></td>
+                        <td><?php if ($ev_pre == "P18")     { echo $ev_pre;    } ?></td>
+                        <td><?php if ($ev_qx == "X65E")     { echo $ev_qx;    } ?></td>
+                        <td><?php if ($reg_anes == "X65R")  { echo $reg_anes; } ?></td>
+                        <td><?php if ($post_op == "P10")    { echo $post_op;  } ?></td>
+                        <td><?php if ($recupera == "X65P")  { echo $recupera; } ?></td>
+                        <td><?php if ($anes_qx == "X66R")   { echo $anes_qx;  } ?></td>
 
-                            <td><?php echo $consultorio               ?></td> 
-                            <td><?php echo $profesional              ?></td> 
-                            <td><?php echo $pasiente                     ?></td>
-                            <td><?php echo $ingreso           ?></td>
-
-                            
                             <?php $conexion = null; ?>
-                    </tr>   
-
-                       
-                        
+                    </tr>                        
                 <?php
                     }
                 ?>
