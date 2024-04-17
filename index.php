@@ -66,9 +66,115 @@
                                  ?> </td> 
                         <?php $conexion = null; ?>
 
+                            <td> <?php 
+                                require 'modelo/select.php';
+                                $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'and QM1_COD_TIPOATEN = 'P18'";
+                                $result = $conexion->query($sql);
+                                while($mostrarPre      = $result->fetch(PDO::FETCH_ASSOC)){
+                                $ev_pre         =    $mostrarPre["QM1_EST_CERRAR"];
+                            
+                                        if ($ev_pre == "S") 
+                                        {echo "Ejecutado"; } else {
+                                            echo "No Ejecutado";
+                                        }
+                            ?> </td> 
+                        <?php $conexion = null; ?>
+
+                        <td> <?php 
+                                require 'modelo/select.php';
+                                $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'and QM1_COD_TIPOATEN = 'X65E'";
+                                $result = $conexion->query($sql);
+                                while($mostrarEvQX      = $result->fetch(PDO::FETCH_ASSOC)){
+                                $ev_qx         =    $mostrarEvQX["QM1_EST_CERRAR"];
+                            
+                                        if ($ev_qx == "S") 
+                                        {echo "Ejecutado"; } else {
+                                            echo "No Ejecutado";
+                                        }
+                            ?> </td> 
+                        <?php $conexion = null; ?>
+
+                        <td> <?php 
+                                
+                               try {
+                                require 'modelo/select.php';
+                                // Consulta SQL
+                                $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410' AND QM1_COD_TIPOATEN = 'X65R'";
+                                $result = $conexion->query($sql);
+
+                                // Verificar si la columna QM1_EST_CERRAR existe
+                                $columnas = $result->fetch(PDO::FETCH_ASSOC);
+                                if (isset($columnas['QM1_EST_CERRAR'])) {
+                                    // La columna QM1_EST_CERRAR existe, entonces iteramos sobre los resultados
+                                    while ($mostrarRegAnex = $result->fetch(PDO::FETCH_ASSOC)) {
+                                        $regAnex = $mostrarRegAnex["QM1_EST_CERRAR"];
+                                        if ($regAnex == "S") 
+                                        {echo "Ejecutado"; } else {
+                                            echo "No Ejecutado";
+                                        }
+                                    }
+                                } else {
+                                    echo "No Ejecutado";
+                                }
+                            } catch (PDOException $e) {
+
+                                echo "Error: " . $e->getMessage();
+                            
+                            ?> </td> 
+                        <?php $conexion = null; ?>
+
+                        <td> <?php 
+                                require 'modelo/select.php';
+                                $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'and QM1_COD_TIPOATEN = 'P10'";
+                                $result = $conexion->query($sql);
+                                while($mostrarPostOp      = $result->fetch(PDO::FETCH_ASSOC)){
+                                $PostOp         =    $mostrarPostOp["QM1_EST_CERRAR"];
+                            
+                                        if ($PostOp == "S") 
+                                        {echo "Ejecutado"; } else {
+                                            echo "No Ejecutado";
+                                        }
+                            ?> </td> 
+                        <?php $conexion = null; ?>
+
+                        <td> <?php 
+                                require 'modelo/select.php';
+                                $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'and QM1_COD_TIPOATEN = 'X65P'";
+                                $result = $conexion->query($sql);
+                                while($mostrarRecup      = $result->fetch(PDO::FETCH_ASSOC)){
+                                $Recup         =    $mostrarRecup["QM1_EST_CERRAR"];
+                            
+                                        if ($Recup == "S") 
+                                        {echo "Ejecutado"; } else {
+                                            echo "No Ejecutado";
+                                        }
+                            ?> </td> 
+                        <?php $conexion = null; ?>
+
+                        <td> <?php 
+                                require 'modelo/select.php';
+                                $sql = "SELECT * FROM TQMOVIMIENTOHC WHERE QM1_FCH_FECHA = '20240410'and QM1_COD_TIPOATEN = 'X66R'";
+                                $result = $conexion->query($sql);
+                                while($mostrarAnesQx      = $result->fetch(PDO::FETCH_ASSOC)){
+                                $AnesQx         =    $mostrarAnesQx["QM1_EST_CERRAR"];
+                            
+                                        if ($AnesQx == "S") 
+                                        {echo "Ejecutado"; } else {
+                                            echo "No Ejecutado";
+                                        }
+                            ?> </td> 
+                        <?php $conexion = null; ?>
+
+
                     </tr>                        
                 <?php
+                        }
                     }
+                }
+            }
+        }
+    }
+}
                 ?>
                 </tbody>
             </table>
